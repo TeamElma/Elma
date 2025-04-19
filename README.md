@@ -1,6 +1,17 @@
-# elma
+# Elma
 
-A new Flutter project.
+A Flutter-based mobile application for exploring and booking experiences.
+
+## Team Members & Contributions
+
+- **Raamiz**: Explore page, Details page, App navigation integration
+- **Salem**: Checkout pages, Splash page, App navigation integration
+- **Ashwin**: Login & Sign up pages
+- **Emir**: Search by city functionality
+- **Mert**: Cart and Payment success screens
+- **Batu**: Messaging system
+
+Raamiz and Salem collaborated on integrating the app's navigation flow to create a seamless user experience.
 
 ## Getting Started
 

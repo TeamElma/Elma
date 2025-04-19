@@ -1,0 +1,211 @@
+// lib/screens/customer_profile.dart
+import 'package:flutter/material.dart';
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _CustomerProfilePageState();
+}
+
+class _CustomerProfilePageState extends State<ProfilePage> {
+  int _currentIndex = 4; // 4 = Profile tab
+
+  // Update index 3 to point at '/inbox'
+  static const _routes = [
+    '/explore',
+    '/wishlist',
+    '/services',
+    '/inbox',    // ← was '/inbox.dart'
+    '/customer',
+  ];
+
+  void _onTabTapped(int idx) {
+    if (idx == _currentIndex) return;
+    Navigator.pushReplacementNamed(context, _routes[idx]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Example customer data
+    const avatarUrl = 'https://i.pravatar.cc/150?img=12';
+    const name = 'Jane Doe';
+    const memberSince = 'Jan 2021';
+    const bookings = 18;
+    const reviewsWritten = 7;
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            automaticallyImplyLeading: false, // no back button here
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text(
+              'Customer Profile',
+              style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500),
+            ),
+            actions: [
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: const Text(
+                  '9:41',
+                  style: TextStyle(color: Colors.black, fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const SizedBox(height: 16),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(avatarUrl),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  name,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Member since $memberSince',
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _StatCard(label: 'Bookings', value: bookings.toString()),
+                    _StatCard(label: 'Reviews', value: reviewsWritten.toString()),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'About',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Enthusiastic home‑services user, always looking for the best professionals to get things done. '
+                            'Love leaving honest feedback to help the community.',
+                        style: TextStyle(fontSize: 14, color: Colors.grey[800], height: 1.4),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Reviews Written',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      ...List.generate(2, (i) => const _ReviewTile()),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        elevation: 8,
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Explore'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Wishlist'),
+          BottomNavigationBarItem(icon: Icon(Icons.room_service_outlined), label: 'Services'),
+          BottomNavigationBarItem(icon: Icon(Icons.message_outlined), label: 'Inbox'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatCard extends StatelessWidget {
+  final String label, value;
+  const _StatCard({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 130,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        children: [
+          Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
+          Text(label, style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReviewTile extends StatelessWidget {
+  const _ReviewTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            const CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=5'),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('Electrician fix was perfect',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(height: 4),
+                  Text('★★★★★', style: TextStyle(color: Colors.orange)),
+                  SizedBox(height: 4),
+                  Text(
+                    '“Really satisfied! Clear communication, arrived on time, and the work was top quality.”',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

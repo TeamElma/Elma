@@ -55,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        title: const Text("Checkout", style: TextStyle(color: Colors.black)),
+        title: const Text("Cart", style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         elevation: 0.5,
         iconTheme: const IconThemeData(color: Colors.black),

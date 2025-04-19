@@ -13,6 +13,21 @@ A Flutter-based mobile application for exploring and booking experiences.
 
 Raamiz Khan Niazi and Mohammed Sateh Salem collaborated on integrating the app's navigation flow to create a seamless user experience.
 
+## Design Elements
+
+### Typography
+The app uses **Poppins** as its primary font family, a modern sans-serif typeface that provides excellent readability and a clean aesthetic across all screens:
+- Regular text (body content): Poppins Regular
+- Medium emphasis text: Poppins Medium (weight 500)
+- Section titles and buttons: Poppins SemiBold (weight 600)
+- Screen titles and important elements: Poppins Bold (weight 700)
+- Italicized text for emphasis: Poppins Italic
+
+### Colors
+- **Primary Color**: Fresh green (#53CF01) - Used for primary actions and brand identity
+- **Accent Color**: Black - Used for text and secondary elements
+- **Background Color**: White - Provides a clean, minimalist base for content
+
 ## App Screens
 
 ### Authentication & Onboarding

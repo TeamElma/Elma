@@ -9,9 +9,24 @@ class AppColors {
 }
 
 class AppTextStyle {
-  static const TextStyle bodyLarge  = TextStyle(fontSize: 16.0);
-  static const TextStyle titleLarge = TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold);
-  static const TextStyle labelLarge = TextStyle(fontSize: 21.0, color: Colors.white);
+  static const String fontFamily = 'Poppins';
+  
+  static const TextStyle bodyLarge  = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 16.0,
+  );
+  
+  static const TextStyle titleLarge = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 25.0, 
+    fontWeight: FontWeight.bold,
+  );
+  
+  static const TextStyle labelLarge = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 21.0, 
+    color: Colors.white,
+  );
 }
 
 class AppPaddings {

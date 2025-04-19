@@ -12,10 +12,45 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController    = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
+  // Add validation error messages
+  String? _emailError;
+  String? _passwordError;
 
   bool get _canContinue =>
       _emailController.text.isNotEmpty &&
-          _passwordController.text.isNotEmpty;
+          _passwordController.text.isNotEmpty &&
+          _emailError == null &&
+          _passwordError == null;
+
+  // Add validation functions
+  void _validateEmail(String value) {
+    setState(() {
+      if (value.isEmpty) {
+        _emailError = "Email is required";
+      } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+        _emailError = "Please enter a valid email address";
+      } else {
+        _emailError = null;
+      }
+    });
+  }
+
+  void _validatePassword(String value) {
+    setState(() {
+      if (value.isEmpty) {
+        _passwordError = "Password is required";
+      } else if (value.length < 6) {
+        _passwordError = "Password must be at least 6 characters";
+      } else if (!RegExp(r'(?=.*?[A-Z])').hasMatch(value)) {
+        _passwordError = "Password must contain at least one uppercase letter";
+      } else if (!RegExp(r'(?=.*?[0-9])').hasMatch(value)) {
+        _passwordError = "Password must contain at least one number";
+      } else {
+        _passwordError = null;
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -85,8 +120,12 @@ class _SignupScreenState extends State<SignupScreen> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          errorText: _emailError,
                         ),
-                        onChanged: (_) => setState(() {}),
+                        onChanged: (value) {
+                          _validateEmail(value);
+                          setState(() {});
+                        },
                       ),
                       const SizedBox(height: 16),
 
@@ -99,8 +138,14 @@ class _SignupScreenState extends State<SignupScreen> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          errorText: _passwordError,
+                          helperText: "Password must be at least 6 characters, contain an uppercase letter and a number",
+                          helperMaxLines: 2,
                         ),
-                        onChanged: (_) => setState(() {}),
+                        onChanged: (value) {
+                          _validatePassword(value);
+                          setState(() {});
+                        },
                       ),
                       const SizedBox(height: 24),
 

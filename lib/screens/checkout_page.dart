@@ -171,6 +171,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
               textStyle: AppTextStyle.labelLarge,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),

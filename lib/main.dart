@@ -7,6 +7,8 @@ import 'package:provider/provider.dart'; // Import Provider
 import 'package:firebase_app_check/firebase_app_check.dart'; // Import App Check
 import 'firebase_options.dart';
 import 'utils/constants.dart';
+import 'package:flutter/foundation.dart'; // For kDebugMode
+import 'package:elma/utils/firestore_seed.dart'; // Import the seed utility
 
 // Core screens
 import 'screens/splash_page.dart';
@@ -31,20 +33,28 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Activate App Check. 
-  // IMPORTANT: For emulators/debug, you might need to use the debug provider.
-  // For production, ensure you have the correct providers configured (Play Integrity for Android, DeviceCheck for iOS).
+  // Initialize Firebase App Check
+  // TODO: Replace 'your-recaptcha-v3-site-key' with your actual reCAPTCHA v3 site key for web.
   await FirebaseAppCheck.instance.activate(
-    // Use the debug provider for emulators. 
-    // You'll see a debug token in your console log when you run the app the first time.
-    // You need to register this token in the Firebase console (App Check > Apps > Your App > Manage debug tokens).
-    // Alternatively, for web or if you have specific needs:
-    // webProvider: ReCaptchaV3Provider('YOUR_RECAPTCHA_V3_SITE_KEY'), 
-    // androidProvider: AndroidProvider.debug, // Or AndroidProvider.playIntegrity
-    // appleProvider: AppleProvider.debug, // Or AppleProvider.deviceCheck // Or AppleProvider.appAttest
-    androidProvider: AndroidProvider.debug, // Using debug provider for Android emulator
-    appleProvider: AppleProvider.debug, // Using debug provider for iOS simulator (if you use it)
+    webProvider: ReCaptchaV3Provider('your-recaptcha-v3-site-key'),
+    androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
   );
+
+  // ---- Conditionally run seed function ----
+  // WARNING: This will write to your Firestore database.
+  // Run it once, then comment it out or make it callable on demand.
+  print("Value of kDebugMode: $kDebugMode"); // Added to check the value
+  if (kDebugMode) { // Restoring this check
+    // To ensure it runs only once per fresh install or when you explicitly want it,
+    // you might use a more sophisticated check, e.g., SharedPreferences.
+    // For now, this will run every time you start in debug mode.
+    // Consider commenting this out after the first successful run.
+    print("DEBUG MODE: Attempting to seed initial data...");
+    await FirestoreSeed.seedInitialData();
+    print("DEBUG MODE: Finished attempting to seed initial data.");
+  } // Restoring this check
+  // ---- End seed function call ----
 
   // runApp(const MyApp()); // We'll wrap MyApp with StreamProvider
   runApp(

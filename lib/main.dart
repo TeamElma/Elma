@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 import 'package:provider/provider.dart'; // Import Provider
+import 'package:firebase_app_check/firebase_app_check.dart'; // Import App Check
 import 'firebase_options.dart';
 import 'utils/constants.dart';
 
@@ -29,6 +30,22 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Activate App Check. 
+  // IMPORTANT: For emulators/debug, you might need to use the debug provider.
+  // For production, ensure you have the correct providers configured (Play Integrity for Android, DeviceCheck for iOS).
+  await FirebaseAppCheck.instance.activate(
+    // Use the debug provider for emulators. 
+    // You'll see a debug token in your console log when you run the app the first time.
+    // You need to register this token in the Firebase console (App Check > Apps > Your App > Manage debug tokens).
+    // Alternatively, for web or if you have specific needs:
+    // webProvider: ReCaptchaV3Provider('YOUR_RECAPTCHA_V3_SITE_KEY'), 
+    // androidProvider: AndroidProvider.debug, // Or AndroidProvider.playIntegrity
+    // appleProvider: AppleProvider.debug, // Or AppleProvider.deviceCheck // Or AppleProvider.appAttest
+    androidProvider: AndroidProvider.debug, // Using debug provider for Android emulator
+    appleProvider: AppleProvider.debug, // Using debug provider for iOS simulator (if you use it)
+  );
+
   // runApp(const MyApp()); // We'll wrap MyApp with StreamProvider
   runApp(
     StreamProvider<User?>.value( // Provide the User stream
@@ -89,11 +106,13 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
 
+    print('AuthWrapper: Building...'); // DEBUG PRINT
     if (firebaseUser != null) {
-      // User is logged in
-      return const ExploreScreen(); // Or your main app screen
+      print('AuthWrapper: User is LOGGED IN - UID: ${firebaseUser.uid}'); // DEBUG PRINT
+      return const ExploreScreen();
+    } else {
+      print('AuthWrapper: User is LOGGED OUT'); // DEBUG PRINT
+      return const WelcomeScreen();
     }
-    // User is not logged in
-    return const WelcomeScreen(); // Or your login/welcome screen
   }
 }

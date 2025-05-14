@@ -1,5 +1,6 @@
 // lib/screens/customer_profile.dart
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -116,6 +117,29 @@ class _CustomerProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 12),
                       ...List.generate(2, (i) => const _ReviewTile()),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Card(
+                    elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: ListTile(
+                      leading: Icon(Icons.logout, color: Colors.red[700]),
+                      title: Text(
+                        'Log Out',
+                        style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        // The StreamProvider in main.dart handles the state change.
+                        // This navigation ensures we pop back to the root controlled by AuthWrapper.
+                        if (mounted) { // Check if the widget is still in the tree
+                          Navigator.of(context).popUntil((route) => route.isFirst);
+                        }
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 40),

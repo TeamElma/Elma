@@ -68,6 +68,24 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "firebase_app_check",
+      "rootUri": "file:///Users/raamizkhanniazi/.pub-cache/hosted/pub.dev/firebase_app_check-0.3.2+5",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_app_check_platform_interface",
+      "rootUri": "file:///Users/raamizkhanniazi/.pub-cache/hosted/pub.dev/firebase_app_check_platform_interface-0.1.1+5",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_app_check_web",
+      "rootUri": "file:///Users/raamizkhanniazi/.pub-cache/hosted/pub.dev/firebase_app_check_web-0.2.0+9",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "firebase_auth",
       "rootUri": "file:///Users/raamizkhanniazi/.pub-cache/hosted/pub.dev/firebase_auth-5.5.3",
       "packageUri": "lib/",
@@ -272,7 +290,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-05-14T17:17:44.619168Z",
+  "generated": "2025-05-14T17:35:56.272279Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///Users/raamizkhanniazi/Development/flutter",

@@ -2,16 +2,26 @@
 application
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/main/AndroidManifest.xml:2:5-33:19
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml
-MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
-MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-13:19
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:21:5-29:19
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:13:5-24:19
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:23:5-31:19
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:23:5-31:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:21:5-32:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:21:5-32:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/a159499e04f9d5848eb9c527e821c718/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:23:5-42:19
@@ -20,12 +30,14 @@ MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/raamizkhan
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3d9182d45369c9cfa72eb4c305dd7e63/transformed/jetified-firebase-auth-interop-20.0.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
-MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
-MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/2172b9c21478c7b9b644d9fe33825927/transformed/jetified-play-services-safetynet-18.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/2172b9c21478c7b9b644d9fe33825927/transformed/jetified-play-services-safetynet-18.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dbc00d4d89480e5caa156dc11c80fa5e/transformed/jetified-integrity-1.3.0/AndroidManifest.xml:5:5-6:19
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dbc00d4d89480e5caa156dc11c80fa5e/transformed/jetified-integrity-1.3.0/AndroidManifest.xml:5:5-6:19
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3cd982b3acfaa561b9d8a91266cd716f/transformed/jetified-firebase-appcheck-interop-17.0.0/AndroidManifest.xml:23:5-20
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3cd982b3acfaa561b9d8a91266cd716f/transformed/jetified-firebase-appcheck-interop-17.0.0/AndroidManifest.xml:23:5-20
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/053073220af0861920752f1681fee375/transformed/jetified-firebase-appcheck-interop-17.1.0/AndroidManifest.xml:21:5-20
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/053073220af0861920752f1681fee375/transformed/jetified-firebase-appcheck-interop-17.1.0/AndroidManifest.xml:21:5-20
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/0ca0bac53d195859c97ccbcf9abde2ca/transformed/jetified-play-services-fido-20.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/0ca0bac53d195859c97ccbcf9abde2ca/transformed/jetified-play-services-fido-20.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/eb80b7c20f86db896fc82173afcd18d6/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:19:5-23:19
@@ -60,23 +72,29 @@ MERGED from /Users/raamizkhanniazi/Elma-1/android/app/src/main/AndroidManifest.x
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
+MERGED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-15:12
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:15:1-31:12
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:15:1-31:12
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:17:1-75:12
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:2:1-26:12
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:15:1-33:12
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:15:1-34:12
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:2:1-18:12
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/847a26655a62540eb6e1b568482ff8fb/transformed/jetified-credentials-1.2.0-rc01/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/a159499e04f9d5848eb9c527e821c718/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/cb9318ad9a24c2d6e57e54f7b3df7536/transformed/jetified-googleid-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3d9182d45369c9cfa72eb4c305dd7e63/transformed/jetified-firebase-auth-interop-20.0.0/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:15:1-41:12
-MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:17:1-40:12
-MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/2172b9c21478c7b9b644d9fe33825927/transformed/jetified-play-services-safetynet-18.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dbc00d4d89480e5caa156dc11c80fa5e/transformed/jetified-integrity-1.3.0/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3cd982b3acfaa561b9d8a91266cd716f/transformed/jetified-firebase-appcheck-interop-17.0.0/AndroidManifest.xml:15:1-25:12
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/c13cb472eda7dfc1964bef7cbbddc976/transformed/jetified-firebase-database-collection-18.0.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/053073220af0861920752f1681fee375/transformed/jetified-firebase-appcheck-interop-17.1.0/AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/0ca0bac53d195859c97ccbcf9abde2ca/transformed/jetified-play-services-fido-20.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/e9a4eedfd1b2264af6fb05197c3cf374/transformed/jetified-play-services-auth-base-18.0.4/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/eb80b7c20f86db896fc82173afcd18d6/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:16:1-24:12
@@ -103,8 +121,8 @@ MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/raamizkhanniazi/.gradl
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/71c2a5c462ada5f663b8ca591b1907a5/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/c4042ec9e8cc7d9cdf61197d11f01375/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ba2395cf8fc4cc2c2d9a7b0f13aa21c0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dfaf4301d7f10a0abf4fefc082e3f899/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8bc22c9aee1a6640ae9b0a38be5c9ed3/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/393754ebd3afdfde0b3ec42e2ddd4b15/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/e9c59a4bf8bd3858592d84cac6cf869a/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -148,16 +166,26 @@ uses-sdk
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml
 INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml
-MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
-MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:21:5-23:151
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:21:5-23:151
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/847a26655a62540eb6e1b568482ff8fb/transformed/jetified-credentials-1.2.0-rc01/AndroidManifest.xml:5:5-44
@@ -170,18 +198,20 @@ MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/raamizkhan
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3d9182d45369c9cfa72eb4c305dd7e63/transformed/jetified-firebase-auth-interop-20.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:19:5-44
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:19:5-44
-MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/2172b9c21478c7b9b644d9fe33825927/transformed/jetified-play-services-safetynet-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/2172b9c21478c7b9b644d9fe33825927/transformed/jetified-play-services-safetynet-18.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dbc00d4d89480e5caa156dc11c80fa5e/transformed/jetified-integrity-1.3.0/AndroidManifest.xml:4:5-44
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dbc00d4d89480e5caa156dc11c80fa5e/transformed/jetified-integrity-1.3.0/AndroidManifest.xml:4:5-44
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3cd982b3acfaa561b9d8a91266cd716f/transformed/jetified-firebase-appcheck-interop-17.0.0/AndroidManifest.xml:18:5-20:41
-MERGED from [com.google.firebase:firebase-appcheck-interop:17.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/3cd982b3acfaa561b9d8a91266cd716f/transformed/jetified-firebase-appcheck-interop-17.0.0/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/aec2051e8622c6859320e752e18020ce/transformed/jetified-play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/c13cb472eda7dfc1964bef7cbbddc976/transformed/jetified-firebase-database-collection-18.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/c13cb472eda7dfc1964bef7cbbddc976/transformed/jetified-firebase-database-collection-18.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/053073220af0861920752f1681fee375/transformed/jetified-firebase-appcheck-interop-17.1.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/053073220af0861920752f1681fee375/transformed/jetified-firebase-appcheck-interop-17.1.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/0ca0bac53d195859c97ccbcf9abde2ca/transformed/jetified-play-services-fido-20.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/0ca0bac53d195859c97ccbcf9abde2ca/transformed/jetified-play-services-fido-20.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/e9a4eedfd1b2264af6fb05197c3cf374/transformed/jetified-play-services-auth-base-18.0.4/AndroidManifest.xml:5:5-44
@@ -234,10 +264,10 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/raamizkhanniazi/.gra
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/c4042ec9e8cc7d9cdf61197d11f01375/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ba2395cf8fc4cc2c2d9a7b0f13aa21c0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ba2395cf8fc4cc2c2d9a7b0f13aa21c0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dfaf4301d7f10a0abf4fefc082e3f899/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/dfaf4301d7f10a0abf4fefc082e3f899/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/da385b0a3e7370e63a72168b189d2994/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8bc22c9aee1a6640ae9b0a38be5c9ed3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8bc22c9aee1a6640ae9b0a38be5c9ed3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/393754ebd3afdfde0b3ec42e2ddd4b15/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
@@ -263,45 +293,73 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/raamizkhanniazi/.
 	android:minSdkVersion
 		INJECTED from /Users/raamizkhanniazi/Elma-1/android/app/src/debug/AndroidManifest.xml
 service#com.google.firebase.components.ComponentDiscoveryService
-ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+ADDED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
 MERGED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:22:9-28:19
+MERGED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:22:9-28:19
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:22:9-28:19
+MERGED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:22:9-28:19
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:66:9-72:19
 MERGED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:66:9-72:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:14:9-23:19
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:14:9-23:19
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:24:9-30:19
+MERGED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:24:9-30:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:22:9-31:19
+MERGED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:22:9-31:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
 MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
 	android:exported
-		ADDED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:68:13-37
+		ADDED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:24:13-37
 	tools:targetApi
 		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:34:13-32
 	android:directBootAware
 		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:32:13-43
 	android:name
-		ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:18-89
-meta-data#com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar
-ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+		ADDED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:18-89
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.appcheck.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
 	android:value
-		ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+		ADDED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
 	android:name
-		ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+		ADDED from [:firebase_app_check] /Users/raamizkhanniazi/Elma-1/build/firebase_app_check/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-127
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar
 ADDED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
 	android:value
 		ADDED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
 	android:name
 		ADDED from [:cloud_firestore] /Users/raamizkhanniazi/Elma-1/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-134
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar
+ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_auth] /Users/raamizkhanniazi/Elma-1/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar
 ADDED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
 	android:value
 		ADDED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
 	android:name
 		ADDED from [:firebase_core] /Users/raamizkhanniazi/Elma-1/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.debug.FirebaseAppCheckDebugRegistrar
+ADDED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck-debug:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/51dd163734c4e7dfd7f9acee748b6ad3/transformed/jetified-firebase-appcheck-debug-18.0.0/AndroidManifest.xml:26:17-128
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.playintegrity.FirebaseAppCheckPlayIntegrityRegistrar
+ADDED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck-playintegrity:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1cc205a69557fe55750a86efa623e1e0/transformed/jetified-firebase-appcheck-playintegrity-18.0.0/AndroidManifest.xml:26:17-144
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.firebase:firebase-auth:23.2.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/633413bad6a67ccffb521b72ab86b298/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:26:5-79
 MERGED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:10:5-79
@@ -370,6 +428,24 @@ ADDED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniaz
 		ADDED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:22:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-firestore:25.1.3] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bb728f7ea1255e726259cb05934732da/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:21:17-111
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.safetynet.FirebaseAppCheckSafetyNetRegistrar
+ADDED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:27:13-29:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:29:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck-safetynet:16.1.2] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/1678241b53ac61e73e366b21317a9707/transformed/jetified-firebase-appcheck-safetynet-16.1.2/AndroidManifest.xml:28:17-136
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar
+ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:26:17-120
+meta-data#com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar
+ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-appcheck:18.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/8dc062a3d6c29573cb8a86d36a2ebec8/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:29:17-117
 meta-data#com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar
 ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/bcc8d2985ec1ab09d1e21c43fe50ab02/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
 	android:value
@@ -424,6 +500,10 @@ ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.
 		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:37:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/ec4138de37aaf41c537b7e74e719439c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
+ADDED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:5-98
+	android:name
+		ADDED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:22-95
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents
@@ -444,10 +524,6 @@ ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhann
 		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
 	android:name
 		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/7f3cbd85e9776d1033d598bbdc03a650/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
-ADDED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:5-98
-	android:name
-		ADDED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/63c8215b4ef0ce806491a9ae657bddeb/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:22-95
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.1.0] /Users/raamizkhanniazi/.gradle/caches/8.10.2/transforms/eb80b7c20f86db896fc82173afcd18d6/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
 	android:exported

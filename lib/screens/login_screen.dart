@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 import '../utils/constants.dart';
 import '../widgets/social_button.dart';
 
@@ -12,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController    = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false; // For loading indicator
   
   // Add validation error messages
   String? _emailError;
@@ -46,6 +48,61 @@ class _LoginScreenState extends State<LoginScreen> {
         _passwordError = null;
       }
     });
+  }
+
+  Future<void> _signInWithEmailAndPassword() async {
+    if (!_canContinue) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      
+      // If sign-in is successful and the widget is still mounted,
+      // pop the login screen. AuthWrapper will handle showing ExploreScreen.
+      if (mounted) {
+        Navigator.of(context).pop(); // Pop the LoginScreen
+      }
+
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      String errorMessage = "An unknown error occurred.";
+      if (e.code == 'user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Wrong password provided for that user.';
+      } else if (e.code == 'invalid-email') {
+        errorMessage = 'The email address is not valid.';
+      } else if (e.code == 'user-disabled') {
+        errorMessage = 'This user account has been disabled.';
+      } // Add more specific error codes as needed
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text("An unexpected error occurred. Please try again."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+
+    if (mounted) {
+        setState(() {
+            _isLoading = false;
+        });
+    }
   }
 
   @override
@@ -138,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Continue Button (reset stack to Explore)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _canContinue
+                          backgroundColor: _canContinue && !_isLoading
                               ? AppColors.primary
                               : Colors.grey,
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -146,19 +203,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        onPressed: _canContinue
-                            ? () {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/explore',
-                                (route) => false,
-                          );
-                        }
+                        onPressed: _canContinue && !_isLoading
+                            ? _signInWithEmailAndPassword // Call the sign-in method
                             : null,
-                        child: const Text(
-                          "Continue",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
+                        child: _isLoading 
+                            ? const SizedBox(
+                                width: 20, 
+                                height: 20, 
+                                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.0)
+                              )
+                            : const Text(
+                                "Continue",
+                                style: TextStyle(fontSize: 16, color: Colors.white),
+                              ),
                       ),
                       const SizedBox(height: 24),
 

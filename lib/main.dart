@@ -1,6 +1,10 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
+import 'package:provider/provider.dart'; // Import Provider
+import 'firebase_options.dart';
 import 'utils/constants.dart';
 
 // Core screens
@@ -20,8 +24,19 @@ import 'screens/cart_screen.dart';
 import 'messaging/repositories/chat_repository.dart';
 import 'screens/inbox.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // runApp(const MyApp()); // We'll wrap MyApp with StreamProvider
+  runApp(
+    StreamProvider<User?>.value( // Provide the User stream
+      value: FirebaseAuth.instance.authStateChanges(),
+      initialData: null,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +61,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.background,
         useMaterial3: true,
       ),
-      home: const SplashPage(),
+      // home: const SplashPage(), // home will be handled by AuthWrapper
+      home: const AuthWrapper(), // New AuthWrapper to decide initial screen
       routes: {
         '/welcome': (c) => const WelcomeScreen(),
         '/login':   (c) => const LoginScreen(),
@@ -62,5 +78,22 @@ class MyApp extends StatelessWidget {
         '/cart': (c) => const CartScreen(),
       },
     );
+  }
+}
+
+// New Widget to handle initial screen based on auth state
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+
+    if (firebaseUser != null) {
+      // User is logged in
+      return const ExploreScreen(); // Or your main app screen
+    }
+    // User is not logged in
+    return const WelcomeScreen(); // Or your login/welcome screen
   }
 }

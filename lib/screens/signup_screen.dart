@@ -1,5 +1,6 @@
 // lib/screens/signup_screen.dart
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 import '../utils/constants.dart';
 import '../widgets/social_button.dart';
 
@@ -12,6 +13,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController    = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false; // For loading indicator
   
   // Add validation error messages
   String? _emailError;
@@ -50,6 +52,48 @@ class _SignupScreenState extends State<SignupScreen> {
         _passwordError = null;
       }
     });
+  }
+
+  Future<void> _signUp() async {
+    if (!_canContinue) return;
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      // Navigation will be handled by AuthWrapper in main.dart
+      // if (mounted) Navigator.pushNamedAndRemoveUntil(context, '/explore', (route) => false);
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = "An error occurred. Please try again.";
+      if (e.code == 'weak-password') {
+        errorMessage = 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        errorMessage = 'The account already exists for that email.';
+      } else if (e.code == 'invalid-email') {
+        errorMessage = 'The email address is not valid.';
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("An unexpected error occurred: ${e.toString()}"), backgroundColor: Colors.red),
+        );
+      }
+    }
+
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -152,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       // Continue → ExploreScreen (clears back stack)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _canContinue
+                          backgroundColor: _canContinue && !_isLoading
                               ? AppColors.primary
                               : Colors.grey,
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -160,19 +204,16 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        onPressed: _canContinue
-                            ? () {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/explore',
-                                (route) => false,
-                          );
-                        }
-                            : null,
-                        child: const Text(
-                          "Continue",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
+                        onPressed: _canContinue && !_isLoading ? _signUp : null,
+                        child: _isLoading
+                            ? const SizedBox(
+                                width: 20, height: 20,
+                                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.0)
+                              )
+                            : const Text(
+                                "Continue",
+                                style: TextStyle(fontSize: 16, color: Colors.white),
+                              ),
                       ),
                       const SizedBox(height: 24),
 

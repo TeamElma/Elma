@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="gcm_defaultSenderId" translatable="false">367301688722</string>
+    <string name="google_api_key" translatable="false">AIzaSyAgvYjM5x6AA96nsXM0iWHd3bw51WHs6f8</string>
+    <string name="google_app_id" translatable="false">1:367301688722:android:8378b053262bd585f6554b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAgvYjM5x6AA96nsXM0iWHd3bw51WHs6f8</string>
+    <string name="google_storage_bucket" translatable="false">elma-88729.firebasestorage.app</string>
+    <string name="project_id" translatable="false">elma-88729</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         
         <item name="android:windowBackground">@drawable/launch_background</item>

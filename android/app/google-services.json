@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "367301688722",
+    "project_id": "elma-88729",
+    "storage_bucket": "elma-88729.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367301688722:android:8378b053262bd585f6554b",
+        "android_client_info": {
+          "package_name": "com.example.elma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgvYjM5x6AA96nsXM0iWHd3bw51WHs6f8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

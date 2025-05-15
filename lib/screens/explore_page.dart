@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Added for state management
 import 'package:elma/models/service_model.dart'; // Added for ServiceModel
-import 'booking_search_screen.dart';
+// import 'booking_search_screen.dart'; // No longer needed as search is integrated
 
 /// --- Data Models ---
 
@@ -25,6 +25,8 @@ class ExploreScreen extends StatefulWidget {
 class _ExploreScreenState extends State<ExploreScreen> {
   int _selectedCategoryIndex = 0;
   int _currentBottomNavIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   final List<CategoryItem> _categories = [
     CategoryItem(icon: Icons.apps, name: 'All'),
@@ -38,6 +40,22 @@ class _ExploreScreenState extends State<ExploreScreen> {
     // TODO: Consider populating categories dynamically or aligning with ServiceModel.category
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   void _onCategorySelected(int i) =>
       setState(() => _selectedCategoryIndex = i);
 
@@ -45,6 +63,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
     if (idx == 0) {
       // Clear out everything and show Explore as the only route
       Navigator.pushNamedAndRemoveUntil(context, '/explore', (r) => false);
+      return;
+    }
+    if (idx == 2) {
+      Navigator.pushNamed(context, '/service-management');
       return;
     }
     if (idx == 3) {
@@ -83,9 +105,24 @@ class _ExploreScreenState extends State<ExploreScreen> {
             .where((service) => service.category == selectedCategoryName)
             .toList();
       }
+
+      // Further filter by search query
+      if (_searchQuery.isNotEmpty) {
+        filteredServices = filteredServices.where((service) {
+          final query = _searchQuery.toLowerCase();
+          return service.title.toLowerCase().contains(query) ||
+                 (service.description?.toLowerCase().contains(query) ?? false) ||
+                 service.category.toLowerCase().contains(query) ||
+                 (service.providerName?.toLowerCase().contains(query) ?? false); // Assuming providerName is available
+        }).toList();
+      }
       
       if (filteredServices.isEmpty) {
-        bodyWidget = Center(child: Text('No services found in the selected category: ${_categories[_selectedCategoryIndex].name}.'));
+        if (_searchQuery.isNotEmpty) {
+          bodyWidget = Center(child: Text('No services found for "${_searchQuery}" in ${_categories[_selectedCategoryIndex].name}.'));
+        } else {
+          bodyWidget = Center(child: Text('No services found in the selected category: ${_categories[_selectedCategoryIndex].name}.'));
+        }
       } else {
         bodyWidget = _ListingList(services: filteredServices);
       }
@@ -98,24 +135,31 @@ class _ExploreScreenState extends State<ExploreScreen> {
         elevation: 0,
         titleSpacing: 0,
         // Tappable "search bar"
-        title: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/search'),
-          child: Container(
-            height: 40,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(30),
+        title: Container(
+          height: 45, // Increased height slightly
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Added vertical margin
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.search, color: Colors.grey[600]),
+              hintText: 'Search services, e.g. plumbing, tech...',
+              hintStyle: TextStyle(color: Colors.grey[600]),
+              border: InputBorder.none,
+              suffixIcon: _searchQuery.isNotEmpty
+                  ? IconButton(
+                      icon: Icon(Icons.clear, color: Colors.grey[600]),
+                      onPressed: () {
+                        _searchController.clear();
+                      },
+                    )
+                  : null,
             ),
-            alignment: Alignment.centerLeft,
-            child: const Row(
-              children: [
-                Icon(Icons.search, color: Colors.grey),
-                SizedBox(width: 8),
-                Text('How can we help?', style: TextStyle(color: Colors.grey)),
-              ],
-            ),
+            style: TextStyle(color: Colors.black87, fontSize: 16), // Added text style
           ),
         ),
         bottom: PreferredSize(

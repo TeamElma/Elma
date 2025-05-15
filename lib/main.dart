@@ -126,12 +126,12 @@ class MyApp extends StatelessWidget {
         '/login':   (c) => const LoginScreen(),
         '/signup':  (c) => const SignupScreen(),
         '/explore': (c) => const ExploreScreen(),
-        '/details': (c) => const ServiceProviderPage(),
+        '/details': (c) => ServiceProviderPage(),
         '/profile': (c) => const ProfilePage(),
         '/search':  (c) => const BookingSearchScreen(),
         // Pass the shared ChatRepository into InboxScreen:
         '/inbox':  (c) => InboxScreen(chatRepository: _chatRepository),
-        '/checkout': (c) => const CheckoutPage(),
+        '/checkout': (c) => CheckoutPage(),
         '/payment-success': (c) => const PaymentSuccessScreen(),
         '/cart': (c) => const CartScreen(),
         '/service-management': (c) => const ServiceManagementScreen(), // Add this route

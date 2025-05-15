@@ -1,12 +1,16 @@
 // lib/screens/checkout_page.dart
 
 import 'package:flutter/material.dart';
+import 'package:elma/models/service_model.dart'; // Import ServiceModel
 import '../utils/constants.dart';
 
 enum PaymentMethod { card, paypal, applePay }
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({Key? key}) : super(key: key);
+  // const CheckoutPage({Key? key}) : super(key: key); // Old constructor
+  final ServiceModel? serviceToCheckout; // To receive the service
+
+  const CheckoutPage({Key? key, this.serviceToCheckout}) : super(key: key);
 
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
@@ -22,12 +26,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final _cvvController          = TextEditingController();
   final _paypalEmailController  = TextEditingController();
 
-  // Dummy data for services acquired.
-  final List<Map<String, dynamic>> _services = [
-    {'name': 'Painting',       'cost': 750.00},
-    {'name': 'Electrical',     'cost': 500.00},
-    {'name': 'Transportation', 'cost': 200.00},
-  ];
+  // Dummy data for services acquired - will be replaced by passed service
+  // final List<Map<String, dynamic>> _services = [
+  //   {'name': 'Painting',       'cost': 750.00},
+  //   {'name': 'Electrical',     'cost': 500.00},
+  //   {'name': 'Transportation', 'cost': 200.00},
+  // ];
+  ServiceModel? _service;
+
+  @override
+  void initState() {
+    super.initState();
+    // Try to get service from widget arguments if not directly passed (for route navigation)
+    // This is a bit redundant if always passing to constructor, but safe for named routes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.serviceToCheckout == null && ModalRoute.of(context)?.settings.arguments != null) {
+        setState(() {
+          _service = ModalRoute.of(context)!.settings.arguments as ServiceModel?;
+        });
+      } else {
+        _service = widget.serviceToCheckout;
+      }
+       if (_service == null) {
+        // Fallback or error if no service is provided - might navigate back or show error
+        print("Error: CheckoutPage opened without a service model.");
+        // You might want to Navigator.pop(context) here or show a message
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -46,11 +72,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate total
-    final totalCost = _services.fold<double>(
-      0,
-          (sum, item) => sum + (item['cost'] as double),
-    );
+    // Calculate total from the passed service
+    final double totalCost = _service?.priceInfo?.amount ?? 0.00;
+    final String serviceName = _service?.title ?? "Selected Service";
 
     return Scaffold(
       appBar: AppBar(
@@ -84,17 +108,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       style: AppTextStyle.bodyLarge
                           .copyWith(fontWeight: FontWeight.w600)),
                   const SizedBox(height: 8),
-                  ..._services.map((service) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(service['name'], style: AppTextStyle.bodyLarge),
-                        Text("\$${service['cost'].toStringAsFixed(2)}",
-                            style: AppTextStyle.bodyLarge),
-                      ],
-                    ),
-                  )),
+                  // Display the single service being checked out
+                  if (_service != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: Text(serviceName, style: AppTextStyle.bodyLarge, overflow: TextOverflow.ellipsis)),
+                          Text("\$${totalCost.toStringAsFixed(2)}",
+                              style: AppTextStyle.bodyLarge),
+                        ],
+                      ),
+                    )
+                  else
+                     Text("No service selected for checkout.", style: AppTextStyle.bodyLarge),
                   const Divider(height: 24, thickness: 1),
 
                   // Reservation details

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:elma/models/service_model.dart'; // Import ServiceModel
 
 class ServiceProviderPage extends StatefulWidget {
-  const ServiceProviderPage({Key? key}) : super(key: key);
+  // Removed const since we might receive arguments
+  ServiceProviderPage({Key? key}) : super(key: key);
 
   @override
   State<ServiceProviderPage> createState() => _ServiceProviderPageState();
@@ -9,12 +11,42 @@ class ServiceProviderPage extends StatefulWidget {
 
 class _ServiceProviderPageState extends State<ServiceProviderPage> {
   bool _isFavorite = false;
-  final double _rating = 4.95;
-  final int _reviews = 22;
-  final int _monthsWorking = 10;
+  // These will be overridden by service data if available
+  // double _rating = 4.95; 
+  // int _reviews = 22;
+  // final int _monthsWorking = 10; // This might not be in ServiceModel
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the ServiceModel passed as an argument
+    final ServiceModel? service = ModalRoute.of(context)?.settings.arguments as ServiceModel?;
+
+    if (service == null) {
+      // Handle case where service is not passed, though this shouldn't happen with correct navigation
+      return Scaffold(
+        appBar: AppBar(title: const Text("Error")),
+        body: const Center(child: Text("Service details not found.")),
+      );
+    }
+
+    // Use service data, with fallbacks for safety
+    final String providerName = service.providerName ?? 'Service Provider';
+    final String serviceTitle = service.title;
+    final String serviceCategory = service.category ?? 'Uncategorized';
+    final String mainImageUrl = (service.imageUrls != null && service.imageUrls!.isNotEmpty)
+        ? service.imageUrls![0]
+        : 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop'; // Fallback image
+    final String providerPhoto = service.providerPhotoUrl ?? 'https://i.pravatar.cc/150?img=8'; // Fallback avatar
+    final double averageRating = service.averageRating ?? 0.0;
+    final int totalReviews = service.totalReviews ?? 0; // Corrected from totalRatings to totalReviews
+    final String locationAddress = service.serviceLocation?.addressString ?? 'Location not available'; // Corrected to serviceLocation.addressString
+    final String serviceDescription = service.description ?? 'No description available.';
+    // Price for the bottom bar
+    final String priceDisplay = service.priceInfo != null
+        ? '${service.priceInfo!.amount.toStringAsFixed(2)} ${service.priceInfo!.currency} ${service.priceInfo!.basis}'
+        : 'Price N/A';
+
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -22,29 +54,56 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
             backgroundColor: Colors.white,
             elevation: 0,
             pinned: true,
+            expandedHeight: 250, // Allow app bar to expand
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                mainImageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/placeholder_image.png', fit: BoxFit.cover), // Placeholder on error
+              ),
+            ),
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: const BackButton(color: Colors.black),
+                backgroundColor: Colors.black.withOpacity(0.5),
+                child: const BackButton(color: Colors.white),
               ),
             ),
-            title: const Text(
-              'Explore / Listing',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            centerTitle: false,
             actions: [
-              Container(
-                width: 80,
-                alignment: Alignment.center,
-                child: const Text(
-                  '9:41',
-                  style: TextStyle(color: Colors.black, fontSize: 14),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.black.withOpacity(0.5),
+                  child: IconButton(
+                    icon: const Icon(Icons.share, color: Colors.white),
+                    onPressed: () {
+                      // TODO: Implement share functionality
+                       ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Share not implemented yet.')),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.black.withOpacity(0.5),
+                  child: IconButton(
+                    icon: Icon(
+                      _isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: _isFavorite ? Colors.red : Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isFavorite = !_isFavorite;
+                        // TODO: Implement favorite/wishlist backend integration
+                      });
+                       ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(_isFavorite ? 'Added to favorites.' : 'Removed from favorites.')),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -53,331 +112,163 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Provider Image
-                Stack(
-                  children: [
-                    Image.network(
-                      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop',
-                      height: 250,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      right: 16,
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 20,
-                            child: IconButton(
-                              icon: const Icon(Icons.share, color: Colors.black),
-                              onPressed: () {},
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 20,
-                            child: IconButton(
-                              icon: Icon(
-                                _isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color:
-                                _isFavorite ? Colors.red : Colors.black,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _isFavorite = !_isFavorite;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-
-                // Provider Info
+                // Provider Info Section (replaces old Stack and Image.network)
                 Container(
                   color: Colors.white,
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Ali Ahmet',
-                        style: TextStyle(
+                      Text(
+                        serviceTitle, // Dynamic service title
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        'Electrician',
+                      Text(
+                        'Service by $providerName • $serviceCategory', // Dynamic provider and category
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.black87,
+                          color: Colors.grey[700],
                         ),
                       ),
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          const Icon(Icons.star, size: 16, color: Colors.black),
+                          Icon(Icons.star, size: 18, color: Colors.amber[600]),
+                          const SizedBox(width: 4),
                           Text(
-                            ' $_rating · $_reviews reviews',
-                            style: const TextStyle(fontSize: 14),
+                            '${averageRating.toStringAsFixed(1)} ($totalReviews reviews)', // Dynamic rating & reviews
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                           ),
-                          const Text(' · ', style: TextStyle(fontSize: 14)),
-                          const Text(
-                            'Superworker',
-                            style: TextStyle(fontSize: 14),
-                          ),
+                          // const Text(' · ', style: TextStyle(fontSize: 14)),
+                          // const Text( // Superworker might be a derived status, not in base model
+                          //   'Superworker',
+                          //   style: TextStyle(fontSize: 14),
+                          // ),
                         ],
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        'Orta, Tuzla, Istanbul, Türkiye',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      const Divider(height: 32),
-                    ],
-                  ),
-                ),
-
-                // Service Categories
-                Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Electrical Services by Ali',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundImage: NetworkImage(
-                              'https://i.pravatar.cc/150?img=8',
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildServiceCategory(
-                            icon: Icons.bed,
-                            title: 'Electrical Wiring & Installation',
-                          ),
-                          _buildServiceCategory(
-                            icon: Icons.electrical_services,
-                            title: 'Circuit Breaker & Fuse Repair',
-                          ),
-                          _buildServiceCategory(
-                            icon: Icons.home,
-                            title: 'Lighting & Smart Home Setup',
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      _buildServiceFeature(
-                        icon: Icons.build,
-                        title: 'Reliable & Safe Electrical Repairs',
-                        description:
-                        'Expert troubleshooting, panel upgrades, and wiring fixes for homes and offices.',
-                      ),
-                      const SizedBox(height: 16),
-                      _buildServiceFeature(
-                        icon: Icons.lightbulb,
-                        title: 'Smart Home & Energy Efficiency',
-                        description:
-                        'Install modern lighting, automation, and energy-saving solutions.',
-                      ),
-                      const SizedBox(height: 16),
-                      _buildServiceFeature(
-                        icon: Icons.verified,
-                        title: 'Guaranteed Safety & Compliance',
-                        description: '',
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Some info has been automatically translated.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black54,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Meet Your Helper
-                      const Text(
-                        'Meet your helper',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey.shade200),
-                        ),
-                        child: Row(
+                      if (locationAddress != 'Location not available') // Show location if available
+                        Row(
                           children: [
-                            Stack(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: NetworkImage(
-                                    'https://i.pravatar.cc/150?img=8',
-                                  ),
+                            Icon(Icons.location_on_outlined, size: 16, color: Colors.grey[600]),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                locationAddress, // Dynamic location
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey[700],
                                 ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(2),
-                                    decoration: const BoxDecoration(
-                                      color: Colors.green,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 16),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Glowen',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  'Superworker',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  '$_reviews',
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  'Reviews',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.star, size: 16),
-                                    Text(
-                                      ' $_rating',
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  'Rating',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  '$_monthsWorking',
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  'Months working',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              ],
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
-                      ),
-
                       const Divider(height: 32),
-
-                      // About Section
-                      _buildAboutSection(),
-
-                      const Divider(height: 32),
-
-                      // Co-helpers Section
-                      _buildCoHelpersSection(),
-
-                      const Divider(height: 32),
-
-                      // About this service
-                      _buildAboutServiceSection(),
-
-                      const Divider(height: 32),
-
-                      const SizedBox(height: 100), // Space for bottom bar
                     ],
                   ),
                 ),
+
+                // About the service / Description
+                Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                       Text(
+                        'About this $serviceCategory service from $providerName',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      // Provider avatar and name - small section
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundImage: NetworkImage(providerPhoto),
+                             onBackgroundImageError: (_, __) => Icon(Icons.person, size: 20), // Fallback icon
+                          ),
+                          const SizedBox(width: 8),
+                           Text(
+                            providerName,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      // Add Message Host Button here
+                      ElevatedButton.icon(
+                        icon: const Icon(Icons.message_outlined),
+                        label: Text('Message $providerName'),
+                        onPressed: () {
+                          // TODO: Pass provider details to Inbox/Chat screen for specific chat
+                          Navigator.pushNamed(context, '/inbox');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Theme.of(context).colorScheme.primary,
+                          backgroundColor: Colors.white,
+                          side: BorderSide(color: Theme.of(context).colorScheme.primary),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        serviceDescription, // Dynamic service description
+                        style: TextStyle(fontSize: 15, color: Colors.grey[800], height: 1.5),
+                      ),
+                      // const SizedBox(height: 16),
+                      // _buildServiceFeature(...), // Replace with dynamic features if available in model
+                      // const SizedBox(height: 16),
+                      // const Text(
+                      //   'Some info has been automatically translated.',
+                      //   style: TextStyle(
+                      //     fontSize: 14,
+                      //     color: Colors.black54,
+                      //   ),
+                      // ),
+                      const Divider(height: 32),
+                    ],
+                  ),
+                ),
+                
+                // TODO: Re-add Reviews Section if data is available for it
+                // For now, it's commented out as it's not directly in ServiceModel for this example
+                // _buildReviewsSection(context),
+
+                // TODO: Re-add "Where you'll be" (Map section) if location data is robust
+                // _buildLocationSection(context, locationAddress),
+
+                const SizedBox(height: 80), // Space for the bottom bar
               ],
             ),
           ),
         ],
       ),
+      // Bottom Navigation Bar for Actions
       bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1, blurRadius: 5)],
+          border: Border(top: BorderSide(color: Colors.grey[200]!)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            )
+          ],
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -385,35 +276,38 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: const [
-                    Text(
-                      '\$77 ',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    Text('hour', style: TextStyle(fontSize: 16)),
-                  ],
+                Text(
+                  priceDisplay, // Dynamic price
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-                const Text(
-                  'Jun 25 – 30',
-                  style: TextStyle(decoration: TextDecoration.underline, fontSize: 14),
-                ),
+                // Text( // If you have date selection later
+                //   'Aug 15 - 20',
+                //   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                // ),
               ],
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cart');
+                // Navigate to checkout or booking screen
+                Navigator.pushNamed(context, '/checkout', arguments: service);
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   const SnackBar(content: Text('Checkout/Reserve not implemented yet.')),
+                // );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
-              child: const Text(
-                'Reserve',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
+              child: const Text('Reserve'),
             ),
           ],
         ),
@@ -421,148 +315,13 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
     );
   }
 
-  Widget _buildServiceCategory({required IconData icon, required String title}) {
-    return Container(
-      width: 100,
-      height: 120,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 32),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Helper widgets (can be kept if useful, or removed if layout is simpler)
+  // Make sure these are updated if used, or remove them.
+  // For now, I'll comment them out as the main structure is changing.
 
-  Widget _buildServiceFeature({
-    required IconData icon,
-    required String title,
-    required String description,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, size: 24),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              if (description.isNotEmpty)
-                Text(description, style: const TextStyle(fontSize: 14, color: Colors.black87)),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAboutSection() {
-    Widget infoRow(IconData i, String t) => Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(i, size: 20),
-          const SizedBox(width: 12),
-          Expanded(child: Text(t, style: const TextStyle(fontSize: 14))),
-        ],
-      ),
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        infoRow(Icons.lightbulb_outline, 'Born in the 70s'),
-        infoRow(Icons.work, 'My work: Business owner'),
-        infoRow(Icons.access_time, 'I spend too much time: My job, travel, motorsport'),
-        infoRow(Icons.person, 'For clients, I always: Advice the friendly addresses of Nantes'),
-        infoRow(Icons.pets, 'Hobbies: I love cats, we have two.'),
-        TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(padding: EdgeInsets.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Show more', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 4),
-              Icon(Icons.arrow_forward_ios, size: 12, color: Colors.grey.shade700),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCoHelpersSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('Co-helpers', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            CircleAvatar(radius: 20, backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=9')),
-            const SizedBox(width: 12),
-            const Text('Emre Ahmet', style: TextStyle(fontSize: 16)),
-          ],
-        ),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/inbox');
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(200, 48),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-          child: const Text('Message Host'),
-        ),
-        const SizedBox(height: 16),
-        const Text(
-          'To protect your payment, never transfer money or communicate outside of the Elma website or app.',
-          style: TextStyle(fontSize: 14, color: Colors.black87),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAboutServiceSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('About this service', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 16),
-        const Text(
-          'Get expert electrical services for your home or business, ensuring safe, high‑quality repairs and installations. Whether you need wiring fixes, panel upgrades, or emergency support, our certified electricians are here to help.',
-          style: TextStyle(fontSize: 14, height: 1.5),
-        ),
-        const SizedBox(height: 8),
-        TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(padding: EdgeInsets.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Show more', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 4),
-              Icon(Icons.arrow_forward_ios, size: 12, color: Colors.grey.shade700),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildServiceCategory({required IconData icon, required String title}) { ... }
+  // Widget _buildServiceFeature({required IconData icon, required String title, required String description}) { ... }
+  // Widget _buildReviewItem(...) { ... }
+  // Widget _buildLocationSection(...) { ... }
+  // Widget _buildReviewsSection(...) { ... }
 }

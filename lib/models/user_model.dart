@@ -22,6 +22,7 @@ class UserModel {
   final double? overallRating;
   final int? totalServiceReviews;
   final bool? isVerified;
+  final String? phoneNumber;
 
   UserModel({
     required this.userId,
@@ -45,6 +46,7 @@ class UserModel {
     this.overallRating,
     this.totalServiceReviews,
     this.isVerified,
+    this.phoneNumber,
   });
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
@@ -75,6 +77,7 @@ class UserModel {
       overallRating: (data['overallRating'] as num?)?.toDouble(),
       totalServiceReviews: data['totalServiceReviews'] as int?,
       isVerified: data['isVerified'] as bool?,
+      phoneNumber: data['phoneNumber'] as String?,
     );
   }
 
@@ -101,6 +104,7 @@ class UserModel {
         if (overallRating != null) 'overallRating': overallRating,
         if (totalServiceReviews != null) 'totalServiceReviews': totalServiceReviews,
         if (isVerified != null) 'isVerified': isVerified,
+        if (phoneNumber != null) 'phoneNumber': phoneNumber,
       },
     };
   }
@@ -110,14 +114,24 @@ class LocationModel {
   final String? addressString;
   final String? city;
   final GeoPoint? geopoint;
+  final String? country;
+  final String? postalCode;
 
-  LocationModel({this.addressString, this.city, this.geopoint});
+  LocationModel({
+    this.addressString,
+    this.city,
+    this.geopoint,
+    this.country,
+    this.postalCode,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       if (addressString != null) 'addressString': addressString,
       if (city != null) 'city': city,
       if (geopoint != null) 'geopoint': geopoint,
+      if (country != null) 'country': country,
+      if (postalCode != null) 'postalCode': postalCode,
     };
   }
 
@@ -126,6 +140,8 @@ class LocationModel {
       addressString: map['addressString'] as String?,
       city: map['city'] as String?,
       geopoint: map['geopoint'] as GeoPoint?,
+      country: map['country'] as String?,
+      postalCode: map['postalCode'] as String?,
     );
   }
 } 

@@ -126,14 +126,24 @@ class ServiceLocationModel {
   final String? addressString;
   final String? city;
   final GeoPoint? geopoint;
+  final String? country;
+  final String? postalCode;
 
-  ServiceLocationModel({this.addressString, this.city, this.geopoint});
+  ServiceLocationModel({
+    this.addressString,
+    this.city,
+    this.geopoint,
+    this.country,
+    this.postalCode,
+  });
 
   Map<String, dynamic> toMap() {
     return {
       if (addressString != null) 'addressString': addressString,
       if (city != null) 'city': city,
       if (geopoint != null) 'geopoint': geopoint,
+      if (country != null) 'country': country,
+      if (postalCode != null) 'postalCode': postalCode,
     };
   }
 
@@ -142,6 +152,8 @@ class ServiceLocationModel {
       addressString: map['addressString'] as String?,
       city: map['city'] as String?,
       geopoint: map['geopoint'] as GeoPoint?,
+      country: map['country'] as String?,
+      postalCode: map['postalCode'] as String?,
     );
   }
 } 

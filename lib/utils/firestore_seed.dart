@@ -47,40 +47,65 @@ class FirestoreSeed {
     String providerUid = currentUser.uid;
     print('SEEDER: Current user UID for seeding: $providerUid, Email: ${currentUser.email}');
 
-    String userEmail = currentUser.email ?? 'provider_${_uuid.v4().substring(0, 8)}@example.com';
-    String firstName = _getRandomFirstName();
-    String lastName = _getRandomLastName();
-    String userDisplayName = currentUser.displayName ?? '$firstName $lastName';
-    String? userPhotoUrl = currentUser.photoURL ?? _getSampleAvatarUrl(userDisplayName);
-
     try {
+      // Fetch existing user document from Firestore
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(providerUid).get();
+      Map<String, dynamic>? existingUserData = userDoc.exists ? userDoc.data() as Map<String, dynamic> : null;
+
+      String determinedDisplayName;
+      String? determinedPhotoUrl;
+      String userEmail = currentUser.email ?? 'provider_${_uuid.v4().substring(0, 8)}@example.com';
+
+      // Determine Display Name
+      if (existingUserData != null && existingUserData['displayName'] != null && (existingUserData['displayName'] as String).isNotEmpty) {
+        determinedDisplayName = existingUserData['displayName'] as String;
+      } else if (currentUser.displayName != null && currentUser.displayName!.isNotEmpty) {
+        determinedDisplayName = currentUser.displayName!;
+      } else {
+        String firstName = _getRandomFirstName();
+        String lastName = _getRandomLastName();
+        determinedDisplayName = '$firstName $lastName';
+      }
+
+      // Determine Photo URL
+      if (existingUserData != null && existingUserData['photoUrl'] != null && (existingUserData['photoUrl'] as String).isNotEmpty) {
+        determinedPhotoUrl = existingUserData['photoUrl'] as String;
+      } else if (currentUser.photoURL != null && currentUser.photoURL!.isNotEmpty) {
+        determinedPhotoUrl = currentUser.photoURL;
+      } else {
+        // Generate if no photoUrl from Firestore or Auth, using the determinedDisplayName
+        determinedPhotoUrl = _getSampleAvatarUrl(determinedDisplayName);
+      }
+
       // 1. Create or Update the currently logged-in user as a Service Provider
       print('Attempting to seed/update provider data for UID: $providerUid');
 
       UserModel serviceProvider = UserModel(
         userId: providerUid,
-        email: userEmail,
-        displayName: userDisplayName,
+        email: userEmail, // Use the determined email
+        displayName: determinedDisplayName, // Use the determined display name
         isServiceProvider: true,
-        photoUrl: userPhotoUrl,
-        aboutMe: 'Passionate and experienced professional dedicated to providing top-quality services. My goal is to exceed client expectations on every project. I specialize in ${_categories[_random.nextInt(_categories.length)]} and ${_categories[_random.nextInt(_categories.length)]}.',
-        providerName: '${userDisplayName}\'s ${_getBusinessSuffix()} Services',
-        providerBio: 'Your trusted partner for all things related to ${_categories[_random.nextInt(_categories.length)]}. With ${_random.nextInt(10) + 1} years of experience, we deliver excellence and customer satisfaction.',
-        specialties: _getRandomSublist(_categories, 3),
-        providerLocation: LocationModel(
-          addressString: '${_random.nextInt(2000) + 100} ${_getRandomStreetName()} St, Techville, FL ${_random.nextInt(90000) + 10000}',
-          city: 'Techville',
-          country: 'USA',
-          postalCode: '${_random.nextInt(90000) + 10000}',
-          geopoint: GeoPoint(28.5383 + (_random.nextDouble() * 0.2 - 0.1), -81.3792 + (_random.nextDouble() * 0.2 - 0.1)), // Near Orlando, FL
-        ),
-        experienceMonths: (_random.nextInt(10) + 1) * 12, // 1 to 10 years
-        overallRating: _random.nextDouble() * 1.5 + 3.5, // 3.5 to 5.0
-        totalServiceReviews: _random.nextInt(200) + 10, // 10 to 210
-        isVerified: _random.nextBool(),
-        phoneNumber: '(${_random.nextInt(900) + 100}) 555-${_random.nextInt(9000) + 1000}',
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
+        photoUrl: determinedPhotoUrl, // Use the determined photo URL
+        aboutMe: existingUserData?['aboutMe'] as String? ?? 'Passionate and experienced professional dedicated to providing top-quality services. My goal is to exceed client expectations on every project. I specialize in ${_categories[_random.nextInt(_categories.length)]} and ${_categories[_random.nextInt(_categories.length)]}.',
+        providerName: existingUserData?['providerName'] as String? ?? '${determinedDisplayName}\'s ${_getBusinessSuffix()} Services',
+        providerBio: existingUserData?['providerBio'] as String? ?? 'Your trusted partner for all things related to ${_categories[_random.nextInt(_categories.length)]}. With ${_random.nextInt(10) + 1} years of experience, we deliver excellence and customer satisfaction.',
+        specialties: existingUserData?['specialties'] != null ? List<String>.from(existingUserData?['specialties']) : _getRandomSublist(_categories, 3),
+        providerLocation: existingUserData?['providerLocation'] != null 
+            ? LocationModel.fromMap(existingUserData?['providerLocation'])
+            : LocationModel(
+                addressString: '${_random.nextInt(2000) + 100} ${_getRandomStreetName()} St, Techville, FL ${_random.nextInt(90000) + 10000}',
+                city: 'Techville',
+                country: 'USA',
+                postalCode: '${_random.nextInt(90000) + 10000}',
+                geopoint: GeoPoint(28.5383 + (_random.nextDouble() * 0.2 - 0.1), -81.3792 + (_random.nextDouble() * 0.2 - 0.1)),
+              ),
+        experienceMonths: existingUserData?['experienceMonths'] as int? ?? (_random.nextInt(10) + 1) * 12,
+        overallRating: existingUserData?['overallRating'] as double? ?? _random.nextDouble() * 1.5 + 3.5,
+        totalServiceReviews: existingUserData?['totalServiceReviews'] as int? ?? _random.nextInt(200) + 10,
+        isVerified: existingUserData?['isVerified'] as bool? ?? _random.nextBool(),
+        phoneNumber: existingUserData?['phoneNumber'] as String? ?? '(${_random.nextInt(900) + 100}) 555-${_random.nextInt(9000) + 1000}',
+        createdAt: existingUserData?['createdAt'] != null ? (existingUserData?['createdAt'] as Timestamp) : Timestamp.now(), // Preserve original creation if exists
+        updatedAt: Timestamp.now(), // Always update this
       );
 
       await _firestore.collection('users').doc(providerUid).set(serviceProvider.toMap(), SetOptions(merge: true));

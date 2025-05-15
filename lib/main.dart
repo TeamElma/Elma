@@ -22,6 +22,7 @@ import 'screens/booking_search_screen.dart';
 import 'screens/PaymentSuccessScreen.dart';
 import 'screens/checkout_page.dart';
 import 'screens/cart_screen.dart';
+import 'screens/service_management_screen.dart'; // Add this import
 
 // Messaging
 import 'messaging/repositories/chat_repository.dart';
@@ -35,11 +36,13 @@ Future<void> main() async {
 
   // Initialize Firebase App Check
   // TODO: Replace 'your-recaptcha-v3-site-key' with your actual reCAPTCHA v3 site key for web.
+   // Temporarily disabling App Check for debugging Firestore rules
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('your-recaptcha-v3-site-key'),
     androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
   );
+  
 
   // ---- Conditionally run seed function ----
   // WARNING: This will write to your Firestore database.
@@ -103,6 +106,7 @@ class MyApp extends StatelessWidget {
         '/checkout': (c) => const CheckoutPage(),
         '/payment-success': (c) => const PaymentSuccessScreen(),
         '/cart': (c) => const CartScreen(),
+        '/service-management': (c) => const ServiceManagementScreen(), // Add this route
       },
     );
   }

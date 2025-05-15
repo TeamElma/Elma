@@ -14,7 +14,7 @@ class ServiceModel {
   final ServiceLocationModel? serviceLocation; // Can be different from provider's main location
   final String? availability; // e.g., "Mon-Fri, 9am-5pm" or structured data
   final double? averageRating; // Calculated
-  final int? totalReviews; // Calculated
+  final int? totalReviews; // Calculated field
   final List<String>? tags; // For search
   final Timestamp? createdAt;
   final Timestamp? updatedAt;

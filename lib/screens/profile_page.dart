@@ -126,6 +126,24 @@ class _CustomerProfilePageState extends State<ProfilePage> {
                     elevation: 1,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     child: ListTile(
+                      leading: Icon(Icons.home_repair_service, color: Theme.of(context).primaryColor),
+                      title: Text(
+                        'Manage Services',
+                        style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/service-management');
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Card(
+                    elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: ListTile(
                       leading: Icon(Icons.logout, color: Colors.red[700]),
                       title: Text(
                         'Log Out',

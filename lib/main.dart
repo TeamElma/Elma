@@ -9,6 +9,10 @@ import 'firebase_options.dart';
 import 'utils/constants.dart';
 import 'package:flutter/foundation.dart'; // For kDebugMode
 import 'package:elma/utils/firestore_seed.dart'; // Import the seed utility
+import 'package:elma/repositories/user_repository.dart'; // Import UserRepository
+import 'package:elma/models/user_model.dart'; // Import UserModel
+import 'package:elma/repositories/service_repository.dart'; // Import ServiceRepository
+import 'package:elma/models/service_model.dart'; // Import ServiceModel
 
 // Core screens
 import 'screens/splash_page.dart';
@@ -27,6 +31,10 @@ import 'screens/service_management_screen.dart'; // Add this import
 // Messaging
 import 'messaging/repositories/chat_repository.dart';
 import 'screens/inbox.dart';
+
+// Create instances of Repositories
+final UserRepository _userRepository = UserRepository();
+final ServiceRepository _serviceRepository = ServiceRepository(); // Added ServiceRepository instance
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,9 +69,29 @@ Future<void> main() async {
 
   // runApp(const MyApp()); // We'll wrap MyApp with StreamProvider
   runApp(
-    StreamProvider<User?>.value( // Provide the User stream
-      value: FirebaseAuth.instance.authStateChanges(),
-      initialData: null,
+    MultiProvider(
+      providers: [
+        StreamProvider<User?>.value(
+          value: FirebaseAuth.instance.authStateChanges(),
+          initialData: null,
+        ),
+        StreamProvider<UserModel?>.value(
+          value: _userRepository.currentUserStream(), 
+          initialData: null,
+          catchError: (_, error) { // Optional: Catch errors from the user profile stream
+            print("Error in UserModel StreamProvider: $error");
+            return null;
+          },
+        ),
+        StreamProvider<List<ServiceModel>?>.value(
+          value: _serviceRepository.getServicesStream(), // Provide all services
+          initialData: null,
+          catchError: (_, error) {
+            print("Error in All Services StreamProvider: $error");
+            return [];
+          },
+        ),
+      ],
       child: const MyApp(),
     ),
   );

@@ -1,6 +1,8 @@
 // lib/screens/customer_profile.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
+import 'package:provider/provider.dart'; // Added for state management
+import 'package:elma/models/user_model.dart'; // Added for UserModel
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -28,12 +30,24 @@ class _CustomerProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Example customer data
-    const avatarUrl = 'https://i.pravatar.cc/150?img=12';
-    const name = 'Jane Doe';
-    const memberSince = 'Jan 2021';
-    const bookings = 18;
-    const reviewsWritten = 7;
+    // Get user data from providers
+    final firebaseUser = context.watch<User?>();
+    final userProfile = context.watch<UserModel?>();
+
+    // Example customer data - replace with actual data from userProfile
+    // const avatarUrl = 'https://i.pravatar.cc/150?img=12';
+    // const name = 'Jane Doe';
+    // const memberSince = 'Jan 2021';
+    // const bookings = 18;
+    // const reviewsWritten = 7;
+
+    String displayName = userProfile?.displayName ?? firebaseUser?.displayName ?? 'User Name';
+    String photoUrl = userProfile?.photoUrl ?? firebaseUser?.photoURL ?? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80'; // Default placeholder
+    String memberSince = userProfile?.createdAt != null 
+        ? 'Joined ${userProfile!.createdAt!.toDate().year}-${userProfile.createdAt!.toDate().month.toString().padLeft(2,'0')}' 
+        : (firebaseUser?.metadata.creationTime != null 
+            ? 'Joined ${firebaseUser!.metadata.creationTime!.year}-${firebaseUser.metadata.creationTime!.month.toString().padLeft(2,'0')}' 
+            : 'N/A');
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -65,26 +79,30 @@ class _CustomerProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 16),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: NetworkImage(avatarUrl),
+                  backgroundImage: NetworkImage(photoUrl), // Use dynamic photoUrl
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  name,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                Text(
+                  displayName, // Use dynamic displayName
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Member since $memberSince',
+                  memberSince, // Use dynamic memberSince
                   style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                 ),
                 const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _StatCard(label: 'Bookings', value: bookings.toString()),
-                    _StatCard(label: 'Reviews', value: reviewsWritten.toString()),
-                  ],
-                ),
+                if (userProfile != null) ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _StatCard(label: 'Bookings', value: 'N/A'), // Placeholder, to be implemented if needed
+                      _StatCard(label: 'Reviews', value: userProfile.totalServiceReviews?.toString() ?? '0'),
+                    ],
+                  ),
+                ] else ...[
+                  const Text("Loading profile stats..."),
+                ],
                 const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -97,8 +115,7 @@ class _CustomerProfilePageState extends State<ProfilePage> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Enthusiastic home‑services user, always looking for the best professionals to get things done. '
-                            'Love leaving honest feedback to help the community.',
+                        userProfile?.aboutMe ?? (userProfile?.isServiceProvider == true ? userProfile?.providerBio : 'No bio available.') ?? 'Loading bio...',
                         style: TextStyle(fontSize: 14, color: Colors.grey[800], height: 1.4),
                       ),
                     ],

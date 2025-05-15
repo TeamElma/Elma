@@ -1,5 +1,7 @@
 // lib/screens/explore_screen.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Added for state management
+import 'package:elma/models/service_model.dart'; // Added for ServiceModel
 import 'booking_search_screen.dart';
 
 /// --- Data Models ---
@@ -9,31 +11,6 @@ class CategoryItem {
   final IconData icon;
   final String name;
   CategoryItem({required this.icon, required this.name});
-}
-
-/// Represents a single listing in the explore view.
-class ListingItem {
-  final List<String> imageUrls;
-  final String profileImageUrl;
-  final String title;
-  final String distance;
-  final String category;
-  final double rating;
-  final String price;
-  bool isFavorite;
-  int currentImageIndex;
-
-  ListingItem({
-    required this.imageUrls,
-    required this.profileImageUrl,
-    required this.title,
-    required this.distance,
-    required this.category,
-    required this.rating,
-    required this.price,
-    this.isFavorite = false,
-    this.currentImageIndex = 0,
-  });
 }
 
 /// --- Explore Screen ---
@@ -50,6 +27,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   int _currentBottomNavIndex = 0;
 
   final List<CategoryItem> _categories = [
+    CategoryItem(icon: Icons.apps, name: 'All'),
     CategoryItem(icon: Icons.handyman_outlined, name: 'Maintenance'),
     CategoryItem(icon: Icons.move_up_outlined, name: 'Moving'),
     CategoryItem(icon: Icons.build_outlined, name: 'Repairs'),
@@ -57,42 +35,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
     CategoryItem(icon: Icons.nightlife_outlined, name: 'Lifestyle'),
     CategoryItem(icon: Icons.design_services_outlined, name: 'Design'),
     CategoryItem(icon: Icons.plumbing_outlined, name: 'Plumbing'),
-  ];
-
-  final List<ListingItem> _listings = [
-    ListingItem(
-      imageUrls: [
-        'https://www.gstatic.com/flutter-onestack-prototype/genui/example_1.jpg',
-        'https://www.gstatic.com/flutter-onestack-prototype/genui/example_2.jpg',
-        'https://www.gstatic.com/flutter-onestack-prototype/genui/example_3.jpg',
-      ],
-      profileImageUrl:
-      'https://www.gstatic.com/flutter-onestack-prototype/genui/example_host.jpg',
-      title: 'Ali Ahmet',
-      distance: '34 miles away',
-      category: 'Home Renovation',
-      rating: 4.96,
-      price: '\$60 per hour',
-    ),
+    // TODO: Consider populating categories dynamically or aligning with ServiceModel.category
   ];
 
   void _onCategorySelected(int i) =>
       setState(() => _selectedCategoryIndex = i);
 
-  void _onFavoriteToggle(int idx) =>
-      setState(() => _listings[idx].isFavorite = !_listings[idx].isFavorite);
-
-  void _onImageChanged(int li, int ii) {
-    if (_listings[li].currentImageIndex != ii) {
-      setState(() => _listings[li].currentImageIndex = ii);
-    }
-  }
-
-  /// Now handles:
-  ///  • idx==0 → reset the entire stack to just Explore
-  ///  • idx==3 → push Inbox on top
-  ///  • idx==4 → push Profile on top
-  ///  • otherwise just switches the highlighted tab
   void _onBottomNavTap(int idx) {
     if (idx == 0) {
       // Clear out everything and show Explore as the only route
@@ -112,7 +60,36 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final displayed = _listings; // no filtering for now
+    // Consume the list of services from the provider, now nullable
+    final allServices = context.watch<List<ServiceModel>?>();
+
+    Widget bodyWidget;
+
+    if (allServices == null) {
+      // Loading state
+      bodyWidget = const Center(child: CircularProgressIndicator());
+    } else if (allServices.isEmpty) {
+      // No services found OR error occurred (since catchError in provider returns [])
+      bodyWidget = const Center(child: Text('No services found or error loading services.'));
+    } else {
+      // Data available, implement filtering
+      List<ServiceModel> filteredServices;
+      if (_selectedCategoryIndex == 0) { // "All" category
+        filteredServices = allServices;
+      } else {
+        // Adjust index because "All" was added at the beginning of _categories
+        final selectedCategoryName = _categories[_selectedCategoryIndex].name;
+        filteredServices = allServices
+            .where((service) => service.category == selectedCategoryName)
+            .toList();
+      }
+      
+      if (filteredServices.isEmpty) {
+        bodyWidget = Center(child: Text('No services found in the selected category: ${_categories[_selectedCategoryIndex].name}.'));
+      } else {
+        bodyWidget = _ListingList(services: filteredServices);
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -150,11 +127,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
         ),
       ),
-      body: _ListingList(
-        listings: displayed,
-        onFavoriteToggle: _onFavoriteToggle,
-        onImageChanged: _onImageChanged,
-      ),
+      body: bodyWidget,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Map view not implemented'))),
@@ -223,15 +196,15 @@ class _CategoryTabs extends StatelessWidget {
                   Icon(c.icon,
                       size: 22,
                       color: sel
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.onSurfaceVariant),
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant),
                   const SizedBox(height: 4),
                   Text(
                     c.name,
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: sel
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.onSurfaceVariant,
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: sel ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
@@ -240,7 +213,7 @@ class _CategoryTabs extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 2),
                       height: 2,
                       width: 30,
-                      color: theme.colorScheme.primary,
+                      color: Theme.of(context).colorScheme.primary,
                     )
                   else
                     const SizedBox(height: 4),
@@ -254,245 +227,112 @@ class _CategoryTabs extends StatelessWidget {
   }
 }
 
-/// --- Listings List & Card ---
+/// --- Listing List & Card Widgets (Modified for ServiceModel) ---
+
 class _ListingList extends StatelessWidget {
-  final List<ListingItem> listings;
-  final ValueChanged<int> onFavoriteToggle;
-  final void Function(int, int) onImageChanged;
+  final List<ServiceModel> services;
 
   const _ListingList({
-    required this.listings,
-    required this.onFavoriteToggle,
-    required this.onImageChanged,
+    required this.services,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (services.isEmpty) {
+      return const Center(child: Text('No services to display.'));
+    }
     return ListView.builder(
-      padding:
-      const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 80),
-      itemCount: listings.length,
-      itemBuilder: (ctx, i) => Padding(
-        padding: const EdgeInsets.only(bottom: 24),
-        child: _ListingCard(
-          listing: listings[i],
-          listingIndex: i,
-          onFavoriteToggle: () => onFavoriteToggle(i),
-          onImageChanged: (ii) => onImageChanged(i, ii),
-        ),
-      ),
+      padding: const EdgeInsets.all(16),
+      itemCount: services.length,
+      itemBuilder: (ctx, i) {
+        final service = services[i];
+        return _ListingCard(
+          service: service,
+        );
+      },
     );
   }
 }
 
-class _ListingCard extends StatefulWidget {
-  final ListingItem listing;
-  final int listingIndex;
-  final VoidCallback onFavoriteToggle;
-  final ValueChanged<int> onImageChanged;
+class _ListingCard extends StatelessWidget {
+  final ServiceModel service;
 
   const _ListingCard({
-    required this.listing,
-    required this.listingIndex,
-    required this.onFavoriteToggle,
-    required this.onImageChanged,
+    required this.service,
   });
 
   @override
-  State<_ListingCard> createState() => _ListingCardState();
-}
-
-class _ListingCardState extends State<_ListingCard> {
-  late final PageController _pageController;
-  bool _profileImageLoadFailed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController =
-    PageController(initialPage: widget.listing.currentImageIndex)
-      ..addListener(() {
-        final idx = _pageController.page
-            ?.round() ??
-            widget.listing.currentImageIndex;
-        if (idx != widget.listing.currentImageIndex) {
-          widget.onImageChanged(idx);
-        }
-      });
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final l = widget.listing;
     final theme = Theme.of(context);
-    final width = MediaQuery.of(context).size.width - 32;
-    final canLoad =
-        !_profileImageLoadFailed && l.profileImageUrl.isNotEmpty;
 
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/details'),
+    return Card(
+      margin: const EdgeInsets.only(bottom: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image carousel
-          Stack(
-            children: [
-              Container(
-                height: width * 0.8,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.grey.shade300,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: l.imageUrls.length,
-                    itemBuilder: (ctx, idx) => Image.network(
-                      l.imageUrls[idx],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (ctx, ch, prog) {
-                        if (prog == null) return ch;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: prog.expectedTotalBytes != null
-                                ? prog.cumulativeBytesLoaded /
-                                prog.expectedTotalBytes!
-                                : null,
-                            color: theme.colorScheme.primary,
-                          ),
-                        );
-                      },
-                      errorBuilder: (ctx, err, st) => const Center(
-                        child: Icon(Icons.broken_image,
-                            size: 40, color: Colors.grey),
+          Container(
+            height: 180,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              image: DecorationImage(
+                image: (service.imageUrls != null && service.imageUrls!.isNotEmpty)
+                    ? NetworkImage(service.imageUrls![0])
+                    : const AssetImage('assets/images/placeholder_image.png') as ImageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 16,
+                      backgroundImage: NetworkImage(service.providerPhotoUrl ?? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80'),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        service.providerName ?? 'Service Provider',
+                        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  ),
-                ),
-              ),
-              // Favorite icon
-              Positioned(
-                top: 12,
-                right: 12,
-                child: IconButton(
-                  icon: Icon(
-                    l.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: l.isFavorite
-                        ? theme.colorScheme.primary
-                        : Colors.white,
-                  ),
-                  onPressed: widget.onFavoriteToggle,
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
-              ),
-              // Profile avatar
-              Positioned(
-                bottom: 12,
-                left: 12,
-                child: CircleAvatar(
-                  radius: 24,
-                  backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 22,
-                    backgroundImage:
-                    canLoad ? NetworkImage(l.profileImageUrl) : null,
-                    onBackgroundImageError: canLoad
-                        ? (_, __) =>
-                        setState(() => _profileImageLoadFailed = true)
-                        : null,
-                    backgroundColor: theme.colorScheme.surfaceVariant,
-                    child: !canLoad
-                        ? Icon(Icons.person_outline,
-                        color:
-                        theme.colorScheme.onSurfaceVariant,
-                        size: 28)
-                        : null,
-                  ),
-                ),
-              ),
-              if (l.imageUrls.length > 1)
-                Positioned(
-                  bottom: 12,
-                  left: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.center,
-                    children:
-                    List.generate(l.imageUrls.length, (i) {
-                      final cur = l.currentImageIndex;
-                      return Container(
-                        width: 6,
-                        height: 6,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 3),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: i == cur
-                              ? Colors.white
-                              : Colors.white
-                              .withAlpha(128),
-                          border: Border.all(
-                              color: Colors.black26,
-                              width: 0.5),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          // Text details
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
-                  children: [
-                    Text(l.title,
-                        style:
-                        theme.textTheme.titleLarge),
-                    const SizedBox(height: 2),
-                    Text(l.distance,
-                        style: theme
-                            .textTheme.bodyMedium),
-                    const SizedBox(height: 2),
-                    Text(l.category,
-                        style: theme
-                            .textTheme.bodyMedium),
                   ],
                 ),
-              ),
-              Row(
-                children: [
-                  Icon(Icons.star,
-                      size: 16,
-                      color:
-                      theme.colorScheme.onSurface),
-                  const SizedBox(width: 4),
-                  Text(
-                    l.rating.toStringAsFixed(2),
-                    style: theme.textTheme.bodyLarge
-                        ?.copyWith(
-                        fontWeight:
-                        FontWeight.w500),
-                  ),
-                ],
-              ),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  service.title,
+                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  service.category ?? 'Uncategorized',
+                  style: theme.textTheme.bodySmall,
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(Icons.star, color: Colors.amber, size: 16),
+                    const SizedBox(width: 4),
+                    Text(
+                      service.averageRating?.toStringAsFixed(1) ?? 'N/A',
+                      style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    Text(
+                      '${service.priceInfo?.amount ?? 'N/A'} ${service.priceInfo?.currency ?? ''} ${service.priceInfo?.basis ?? ''}'.trim(),
+                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

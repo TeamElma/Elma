@@ -129,6 +129,8 @@ class FirestoreSeed {
               createdAt: Timestamp.now(),
               updatedAt: Timestamp.now(),
               isActive: true,
+              providerIsVerified: serviceProvider.isVerified,
+              providerExperienceMonths: serviceProvider.experienceMonths,
             );
 
             await servicesCollection.doc(serviceId).set(service.toMap());

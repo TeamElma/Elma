@@ -24,7 +24,7 @@ class _MessageScreenState extends State<MessageScreen> {
   final ScrollController _scrollController = ScrollController();
 
   List<ChatMessage> get _messages =>
-      widget.chatRepository.getMessages(widget.contact.id);
+      widget.chatRepository.getMessages(widget.contact.id).reversed.toList();
 
   void _sendMessage() {
     final text = _controller.text.trim();
@@ -73,10 +73,14 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.contact.name),
-        backgroundColor: AppColors.primary,
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 1.0,
+        foregroundColor: theme.colorScheme.onSurface,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -86,60 +90,95 @@ class _MessageScreenState extends State<MessageScreen> {
         children: [
           Expanded(
             child: ListView.builder(
+              reverse: true,
               controller: _scrollController,
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               itemCount: _messages.length,
               itemBuilder: (context, i) {
                 final m = _messages[i];
-                final align =
-                m.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-                final color = m.isMe ? AppColors.primary : Colors.grey.shade300;
-                final textColor = m.isMe ? Colors.white : Colors.black87;
-                return Column(
-                  crossAxisAlignment: align,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(12),
+                final bool isMe = m.isMe;
+                final align = isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+                // Use theme colors for bubbles
+                final bubbleColor = isMe ? theme.colorScheme.primary : theme.colorScheme.surfaceVariant;
+                final textColor = isMe ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant;
+                
+                // Determine border radius for chat bubble effect
+                final BorderRadius bubbleRadius = BorderRadius.only(
+                  topLeft: const Radius.circular(20),
+                  topRight: const Radius.circular(20),
+                  bottomLeft: isMe ? const Radius.circular(20) : const Radius.circular(0),
+                  bottomRight: isMe ? const Radius.circular(0) : const Radius.circular(20),
+                );
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Column(
+                    crossAxisAlignment: align,
+                    children: [
+                      Container(
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75), // Max width for bubbles
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14), // Adjusted padding
+                        decoration: BoxDecoration(
+                          color: bubbleColor,
+                          borderRadius: bubbleRadius, // Apply dynamic border radius
+                        ),
+                        child: Text(
+                          m.text,
+                          style: TextStyle(color: textColor, fontSize: 16), // Slightly larger text
+                        ),
                       ),
-                      child: Text(
-                        m.text,
-                        style: TextStyle(color: textColor),
+                      const SizedBox(height: 4),
+                      Text(
+                        _formatTime(m.timestamp),
+                        style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey[600]), // Theme-based timestamp
                       ),
-                    ),
-                    Text(
-                      _formatTime(m.timestamp),
-                      style:
-                      const TextStyle(fontSize: 10, color: Colors.grey),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             ),
           ),
-          const Divider(height: 1),
-          Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          // Modern Input Area
+          Container(
+            decoration: BoxDecoration(
+              color: theme.canvasColor, // Or theme.colorScheme.surface for a slightly different shade
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, -1),
+                  blurRadius: 1,
+                  color: Colors.grey.withOpacity(0.1),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             child: Row(
               children: [
+                // Add other icons here if needed, like an attachment icon
+                // IconButton(icon: Icon(Icons.add), onPressed: () { /* ... */ }),
                 Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: 'Type a message...',
-                      border: InputBorder.none,
+                  child: Container(
+                     decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(25),
                     ),
-                    onSubmitted: (_) => _sendMessage(),
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        hintText: 'Type a message...',
+                        border: InputBorder.none, // Remove default border
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), // Adjust padding
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                      ),
+                      onSubmitted: (_) => _sendMessage(),
+                      minLines: 1,
+                      maxLines: 5, // Allow multi-line input
+                    ),
                   ),
                 ),
+                const SizedBox(width: 8),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  color: AppColors.primary,
+                  color: theme.colorScheme.primary,
                   onPressed: _sendMessage,
                 ),
               ],

@@ -19,6 +19,8 @@ class ServiceModel {
   final Timestamp? createdAt;
   final Timestamp? updatedAt;
   final bool isActive;
+  final bool? providerIsVerified;
+  final int? providerExperienceMonths;
 
   ServiceModel({
     required this.serviceId,
@@ -39,6 +41,8 @@ class ServiceModel {
     this.createdAt,
     this.updatedAt,
     this.isActive = true,
+    this.providerIsVerified,
+    this.providerExperienceMonths,
   });
 
   factory ServiceModel.fromDocument(DocumentSnapshot doc) {
@@ -66,6 +70,8 @@ class ServiceModel {
       createdAt: data['createdAt'] as Timestamp?,
       updatedAt: data['updatedAt'] as Timestamp?,
       isActive: data['isActive'] as bool? ?? true,
+      providerIsVerified: data['providerIsVerified'] as bool?,
+      providerExperienceMonths: data['providerExperienceMonths'] as int?,
     );
   }
 
@@ -88,6 +94,8 @@ class ServiceModel {
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(), // Always set on update
       'isActive': isActive,
+      if (providerIsVerified != null) 'providerIsVerified': providerIsVerified,
+      if (providerExperienceMonths != null) 'providerExperienceMonths': providerExperienceMonths,
     };
   }
 }

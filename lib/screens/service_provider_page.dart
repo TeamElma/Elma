@@ -45,7 +45,10 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
     final String priceDisplay = service.priceInfo != null
         ? '${service.priceInfo!.amount.toStringAsFixed(2)} ${service.priceInfo!.currency} ${service.priceInfo!.basis}'
         : 'Price N/A';
-
+    
+    final bool isProviderVerified = service.providerIsVerified ?? false; // Assuming this field might be added to ServiceModel from UserModel
+    final int experienceYears = (service.providerExperienceMonths ?? 0) ~/ 12;
+    final int imageCount = service.imageUrls?.length ?? 0;
 
     return Scaffold(
       body: CustomScrollView(
@@ -56,10 +59,31 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
             pinned: true,
             expandedHeight: 250, // Allow app bar to expand
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                mainImageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/placeholder_image.png', fit: BoxFit.cover), // Placeholder on error
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    mainImageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/placeholder_image.png', fit: BoxFit.cover), // Placeholder on error
+                  ),
+                  if (imageCount > 1)
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '1 / $imageCount', // Simple counter, real gallery is more complex
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             leading: Padding(
@@ -168,7 +192,26 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                             ),
                           ],
                         ),
-                      const Divider(height: 32),
+                      const Divider(height: 24, thickness: 1, indent: 0, endIndent: 0),
+
+                      // Key Highlights Section
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Wrap(
+                          spacing: 16.0, // Horizontal spacing between items
+                          runSpacing: 12.0, // Vertical spacing between lines
+                          children: [
+                            if (isProviderVerified)
+                              _buildHighlightItem(Icons.verified_user_outlined, 'Verified Provider', context),
+                            if (experienceYears > 0)
+                              _buildHighlightItem(Icons.military_tech_outlined, '$experienceYears+ years experience', context),
+                            _buildHighlightItem(Icons.category_outlined, serviceCategory, context),
+                            // Add more highlights as needed based on data
+                          ],
+                        ),
+                      ),
+
+                      const Divider(height: 24, thickness: 1, indent: 0, endIndent: 0),
                     ],
                   ),
                 ),
@@ -181,7 +224,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                        Text(
-                        'About this $serviceCategory service from $providerName',
+                        'About this service',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -227,16 +270,47 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                         serviceDescription, // Dynamic service description
                         style: TextStyle(fontSize: 15, color: Colors.grey[800], height: 1.5),
                       ),
-                      // const SizedBox(height: 16),
-                      // _buildServiceFeature(...), // Replace with dynamic features if available in model
-                      // const SizedBox(height: 16),
-                      // const Text(
-                      //   'Some info has been automatically translated.',
-                      //   style: TextStyle(
-                      //     fontSize: 14,
-                      //     color: Colors.black54,
-                      //   ),
-                      // ),
+                      const SizedBox(height: 16),
+
+                      // Display Service Availability
+                      if (service.availability != null && service.availability!.isNotEmpty) ...[
+                        Row(
+                          children: [
+                            Icon(Icons.access_time_outlined, size: 18, color: Colors.grey[700]),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                service.availability!,
+                                style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+
+                      // Display Service Tags
+                      if (service.tags != null && service.tags!.isNotEmpty) ...[
+                        Text(
+                          'Tags',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                        ),
+                        const SizedBox(height: 8),
+                        Wrap(
+                          spacing: 8.0,
+                          runSpacing: 4.0,
+                          children: service.tags!
+                              .map((tag) => Chip(
+                                    label: Text(tag),
+                                    backgroundColor: Colors.grey[200],
+                                    labelStyle: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  ))
+                              .toList(),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                      
                       const Divider(height: 32),
                     ],
                   ),
@@ -324,4 +398,25 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
   // Widget _buildReviewItem(...) { ... }
   // Widget _buildLocationSection(...) { ... }
   // Widget _buildReviewsSection(...) { ... }
+
+  // Helper for Key Highlights
+  Widget _buildHighlightItem(IconData icon, String label, BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 20, color: Theme.of(context).textTheme.bodyLarge?.color?.withOpacity(0.7)),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15,
+                ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
 }
